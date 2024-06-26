@@ -19,25 +19,30 @@ public class Main {
         em.getTransaction().begin();
 
         AnimalRepository repository = new AnimalRepository(em);
-
-        do {
-            selectionMenu();
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-                switch (choice) {
-                    case 1 -> AnimalService.createAnimal(scanner, repository);
-                    case 2 -> AnimalService.selectAnimalById(scanner, repository);
-                    case 3 -> AnimalService.selectAnimalByName(scanner, repository);
-                    case 4 -> AnimalService.selectAnimalByFood(scanner, repository);
-                    case 5 -> System.out.println("Goodbye");
-                    default -> System.out.println("Invalid choice. Please try again.");
+        try {
+            do {
+                selectionMenu();
+                try {
+                    choice = Integer.parseInt(scanner.nextLine());
+                    switch (choice) {
+                        case 1 -> AnimalService.createAnimal(scanner, repository);
+                        case 2 -> AnimalService.selectAnimalById(scanner, repository);
+                        case 3 -> AnimalService.selectAnimalByName(scanner, repository);
+                        case 4 -> AnimalService.selectAnimalByFood(scanner, repository);
+                        case 5 -> AnimalService.displayAllAnimals(repository);
+                        case 6 -> System.out.println("Goodbye");
+                        default -> System.out.println("Invalid choice. Please try again.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter a number");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter a number");
+            } while (choice != 6);
+        } finally {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
             }
-        } while (choice != 5);
-
-        em.close();
-        emf.close();
+            em.close();
+            emf.close();
+        }
     }
 }
