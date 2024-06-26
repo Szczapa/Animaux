@@ -1,4 +1,4 @@
-package org.example.Util;
+package org.example.util;
 
 public class Menu {
     public static void selectionMenu() {
