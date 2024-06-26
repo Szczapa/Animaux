@@ -64,4 +64,12 @@ public class AnimalService {
             animalList.forEach(System.out::println);
         }
     }
+    public static void displayAllAnimals(AnimalRepository repository) {
+        List<Animaux> animalList = repository.findAll();
+        if (animalList.isEmpty()) {
+            System.out.println("No animals found");
+        } else {
+            animalList.forEach(System.out::println);
+        }
+    }
 }

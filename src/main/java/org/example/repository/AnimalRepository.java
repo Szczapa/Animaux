@@ -22,9 +22,14 @@ public class AnimalRepository {
         return em.find(Animaux.class, id);
     }
 
+    public List<Animaux> findAll() {
+        Query query = em.createQuery("SELECT a FROM Animaux a", Animaux.class);
+        return query.getResultList();
+    }
+
     public List<Animaux> findByName(String name) {
-        Query query = em.createQuery("SELECT a FROM Animaux a WHERE a.name = :name", Animaux.class);
-        query.setParameter("name", name);
+        Query query = em.createQuery("SELECT a FROM Animaux a WHERE a.name like :name", Animaux.class);
+        query.setParameter("name", "%"+name+"%");
         return query.getResultList();
     }
 

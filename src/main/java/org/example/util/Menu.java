@@ -8,6 +8,7 @@ public class Menu {
         System.out.println("2. Select an animal by id");
         System.out.println("3. Select an animal by name");
         System.out.println("4. Select by food type");
-        System.out.println("5. Exit");
+        System.out.println("5. Display all animals");
+        System.out.println("6. Exit");
     }
 }
